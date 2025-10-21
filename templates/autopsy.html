@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Autopsy | GreenSync</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Required font and Bootstrap links -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">GreenSync</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+    
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item"><a class="nav-link" href="/home">Home</a></li>
+              <li class="nav-item"><a class="nav-link" href="/ask-ai">Ask AI</a></li>
+              <li class="nav-item"><a class="nav-link" href="/disease-detection">Plant Doctor</a></li>
+              <li class="nav-item"><a class="nav-link" href="/control-panel">Robot Hub</a></li>
+              <li class="nav-item"><a class="nav-link" href="/gardening-tips">Waraqāʾ</a></li>
+              <li class="nav-item"><a class="nav-link active" href="/autopsy">Autopsy</a></li>
+              <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+              <li class="nav-item"><a class="nav-link" href="/user-account"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000" fill="none">
+                <path d="M18.5 20V17.9704C18.5 16.7281 17.9407 15.5099 16.8103 14.9946C15.4315 14.3661 13.7779 14 12 14C10.2221 14 8.5685 14.3661 7.18968 14.9946C6.05927 15.5099 5.5 16.7281 5.5 17.9704V20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                <circle cx="12" cy="7.5" r="3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg></a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <br><br>
+      <main class="container">
+        <h1>Plant Autopsy</h1>
+        <br>
+        <form id="autopsyForm" action="{{ url_for('autopsy_page') }}" method="POST" enctype="multipart/form-data">
+            <input type="hidden" id="selectedPlantId" name="selected_plant_id">
+            <input type="hidden" id="plantAutopsyImage" name="plant_autopsy_image">
+
+            <!-- Step 1: Select Plant -->
+            <section class="form-step active" id="stepOne">
+                <h2>Select a Plant</h2>
+                <p id="plantSelectionMessage"></p> <!-- This paragraph will be dynamically updated -->
+                <select id="plantSelect" name="plant_select" required>
+                    <option value="" disabled selected>Choose</option>
+                    <!-- Plants will be dynamically loaded here by Flask -->
+                    {% if plants %}
+                        {% for plant in plants %}
+                            <option value="{{ plant._id }}" data-plant-name="{{ plant.plant_name }}">{{ plant.plant_name }} (ID: {{ plant.plant_number }})</option>
+                        {% endfor %}
+                    {% else %}
+                        <option value="no_plants_added" disabled>No plants added to GreenSync yet.</option>
+                    {% endif %}
+                    <option value="not_added">Not added to GreenSync</option>
+                </select>
+                <div id="plantNameManualInput" style="display:none; margin-top: 15px;">
+                    <label for="manualPlantName">Plant Name (e.g., "My Fiddle Leaf Fig"):</label>
+                    <input type="text" id="manualPlantName" name="manual_plant_name">
+                </div>
+                <div class="text-end">
+                    <button type="button" class="next-step-button">Next <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
+                      </svg></button>
+                </div>
+            </section>
+    
+            <!-- Step 2.1: Watering History -->
+            <section class="form-step" id="stepTwo_Watering">
+                <h2>Tell us about its watering habits.</h2>
+                <p>How often did you water, how much, and what was the drainage like?</p>
+                <label for="wateringHistory">Watering Habits:</label>
+                <select id="wateringHistory" name="watering_history">
+                    <option value="" disabled selected>Select frequency</option>
+                    <option value="daily">Daily</option>
+                    <option value="every_few_days">Every few days</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="bi_weekly">Bi-weekly</option>
+                    <option value="monthly">Monthly</option>
+                    <option value="rarely">Rarely</option>
+                    <option value="other">Other (please specify)</option>
+                </select>
+                <div class="text-end">
+                    <button type="button" class="next-step-button">Next <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
+                      </svg></button>
+                </div>
+            </section>
+
+            <!-- Step 2.2: Light Exposure -->
+            <section class="form-step" id="stepTwo_Light">
+                <h2>Describe its light exposure.</h2>
+                <p>Where was it located, and how many hours of direct or indirect light did it receive?</p>
+                <label for="lightExposure">Light Exposure:</label>
+                <select id="lightExposure" name="light_exposure">
+                    <option value="" disabled selected>Select light exposure</option>
+                    <option value="direct_sun">Direct Sun</option>
+                    <option value="bright_indirect">Bright Indirect</option>
+                    <option value="medium_indirect">Medium Indirect</option>
+                    <option value="low_light">Low Light</option>
+                    <option value="fluorescent">Artificial/Fluorescent Light</option>
+                </select>
+                <div class="text-end">
+                    <button type="button" class="next-step-button">Next <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
+                      </svg></button>
+                </div>
+            </section>
+
+            <!-- Step 2.3: Pest/Disease History -->
+            <section class="form-step" id="stepTwo_PestDisease">
+                <h2>Any pest or disease history?</h2>
+                <p>Were there any signs of pests or diseases?</p>
+                <label for="hasPestDisease">Diseased in the past?</label>
+                <select id="hasPestDisease" name="has_pest_disease">
+                    <option value="" disabled selected>Select</option>
+                    <option value="no">No</option>
+                    <option value="yes">Yes</option>
+                </select>
+                <div id="diseaseDetailsInput" style="display:none; margin-top: 15px;">
+                    <label for="diseaseName">What disease or pest?</label>
+                    <input type="text" id="diseaseName" name="disease_name">
+                </div>
+                <div class="text-end">
+                    <button type="button" class="next-step-button">Next <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
+                      </svg></button>
+                </div>
+            </section>
+    
+            <!-- Step 3: Upload Picture -->
+            <section class="form-step" id="stepThree">
+                <h2>Upload a picture of the plant.</h2>
+                <p>Please upload a clear picture of the dead plant, or a recent picture before it died. Include the background if possible for context.</p>
+                <button type="button" class="upload" id="customUploadButton">
+                    Choose Picture
+                </button>
+                <input type="file" name="plant_picture" id="plantPictureInput" accept="image/*" required style="display: none;">
+                
+                <img id="plantPicturePreview" src="#" alt="Plant Image Preview" style="display: none;">
+                
+                <div class="loading-spinner" id="autopsyLoading">
+                    Analyzing plant data...
+                </div>
+
+                <div id="autopsyResult" style="display:none;">
+                    <h3>Autopsy Report</h3>
+                    <p id="autopsyCause"></p>
+                    <div id="semanticMapContainer" style="display:none;">
+                        <h4>Possible Causes Semantic Map</h4>
+                        <!-- D3.js will render the SVG here -->
+                        <svg id="semanticMapSVG"></svg>
+                    </div>
+                </div>
+
+                <div class="text-end">
+                    <button type="submit" class="submit-button">Submit Autopsy</button>
+                </div>
+            </section>
+        </form>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" xintegrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" xintegrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <!-- D3.js library -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</body>
+</html>

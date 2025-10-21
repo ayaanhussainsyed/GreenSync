@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assign Task to {{ plant.plant_name }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&display=swap" rel="stylesheet">
+    
+</head>
+<body class="d-flex flex-column align-items-center">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light w-100 mb-5">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">GreenSync</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+    
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item"><a class="nav-link" href="/home">Home</a></li>
+              <li class="nav-item"><a class="nav-link" href="/ask-ai">Ask AI</a></li>
+              <li class="nav-item"><a class="nav-link" href="/disease-detection">Plant Doctor</a></li>
+              <li class="nav-item"><a class="nav-link active" aria-current="page" href="/control-panel">Robot Hub</a></li>
+              <li class="nav-item"><a class="nav-link" href="/gardening-tips">Waraqāʾ</a></li>
+              <li class="nav-item"><a class="nav-link" href="/autopsy">Autopsy</a></li>
+              <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+              <li class="nav-item"><a class="nav-link" href="/user-account"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000" fill="none">
+                <path d="M18.5 20V17.9704C18.5 16.7281 17.9407 15.5099 16.8103 14.9946C15.4315 14.3661 13.7779 14 12 14C10.2221 14 8.5685 14.3661 7.18968 14.9946C6.05927 15.5099 5.5 16.7281 5.5 17.9704V20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                <circle cx="12" cy="7.5" r="3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg></a></li>
+            </ul>
+          </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4">
+        <h1 class="text-center mb-5 text-dark">Tasks assignment for <span class="text-success">{{ plant.plant_name }}</span></h1>
+
+        <div class="form-card">
+            <form action="{{ url_for('assign_task_to_plant') }}" method="POST" class="needs-validation" novalidate>
+                <input type="hidden" name="plant_id" value="{{ plant._id }}">
+                <input type="hidden" id="selectedTask" name="task_type">
+                <div class="mb-3">
+                    <label for="task_type_display" class="form-label fs-5 text-dark">Select Task:</label>
+                    <div class="custom-dropdown-container">
+                        <div class="custom-dropdown-toggle" id="taskDropdownToggle">
+                            <span id="dropdownSelectedText">Select Task</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                            </svg>
+                        </div>
+                        <div class="custom-dropdown-menu" id="taskDropdownMenu">
+                            <a class="custom-dropdown-item" data-value="Watering">Watering</a>
+                            <a class="custom-dropdown-item" data-value="Health Analysis">Health Analysis</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="mb-3">
+                    <label for="task_type_display" class="form-label fs-5 text-dark">Select Task:</label>
+                    <div class="custom-dropdown-container">
+                        <div class="custom-dropdown-toggle" id="taskDropdownToggle">
+                            <span id="dropdownSelectedText">Select a task...</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                            </svg>
+                        </div>
+                        <div class="custom-dropdown-menu" id="taskDropdownMenu">
+                            <a class="custom-dropdown-item" data-value="Watering">Watering</a>
+                            <a class="custom-dropdown-item" data-value="Health Monitoring">Health Monitoring</a>
+                            <a class="custom-dropdown-item" data-value="Soil Analysis">Soil Analysis</a>
+                        </div>
+                    </div>
+                </div> -->
+
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="next-step-button">
+                        Assign Task 
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
+                        </svg>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div class="text-center mt-4">
+            <a href="{{ url_for('assign_tasks') }}" class="text-primary text-decoration-none">Back to All Plants</a>
+        </div>
+        <br>
+        <br>
+        <dotlottie-wc
+  src="https://lottie.host/21717718-296d-4905-b8ea-bcd9af4b237f/nqQ7wP1mOz.lottie"
+  style="width: 300px;height: 300px;display: block;margin: auto;"
+  speed="1"
+  autoplay
+  loop
+></dotlottie-wc>
+    </div>
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script
+    src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.6.2/dist/dotlottie-wc.js"
+    type="module"
+  ></script>
+</body>
+</html> 
+
+

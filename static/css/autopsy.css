@@ -1,0 +1,286 @@
+body {
+    font-family: 'Lora', sans-serif; /* Default font for body */
+    color: #333;
+    background-color: #F0E58B; /* Initial background color for step 1 */
+    transition: background-color 0.8s ease-in-out; /* Smooth transition for background color */
+    min-height: 100vh; /* Ensure body takes full viewport height for background color */
+    display: flex;
+    flex-direction: column;
+}
+.container {
+    flex-grow: 1; /* Allow container to grow and push footer down */
+}
+.container h1 {
+    text-align: left;
+    font-family: 'Lora', sans-serif;
+    margin-bottom: 40px;
+    color: #2d3748;
+}
+.form-step {
+    display: none; /* Hidden by default */
+    opacity: 0;    /* Fully transparent by default */
+    transition: opacity 0.6s ease-in-out; /* Smooth transition for fade-in/out */
+    padding: 40px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+.form-step.active {
+    display: block; /* Makes it visible for transition */
+    opacity: 1;    /* Makes it fully opaque */
+}
+.form-step h2 {
+    font-family: 'Lora', sans-serif;
+    font-size: 2.2em;
+    margin-bottom: 30px;
+    text-align: center;
+}
+.form-step p {
+    color: #6b6767;
+    font-size: 1.1em;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+/* Navigation Buttons (Next/Submit) */
+.next-step-button, .submit-button {
+    border: none;
+    background-color: #4CBB17;
+    color: black;
+    display: block;
+    margin: auto;
+    transition: transform 0.3s ease, border-radius 0.3s ease, background-color 0.3s ease;
+    width: 170px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: normal;
+}
+.next-step-button:hover svg {
+    transform: translateX(4px);
+}
+.next-step-button:hover, .submit-button:hover {
+    border-radius: 20px;
+}
+.next-step-button svg, .submit-button svg {
+    transition: transform 0.3s ease;
+    margin-left: 6px;
+    vertical-align: middle;
+}
+
+.text-end {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+/* Form Elements */
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: normal;
+    color: #555;
+    font-family: 'Lora', sans-serif;
+    text-align: center;
+}
+select, input[type="text"] { /* Target select and text input for width and border */
+    width: 45%; /* Reduced width */
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    border: 2px solid #000; /* Blacker border */
+    border-radius: 8px;
+    font-size: 1em;
+    font-family: 'Inter', sans-serif;
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+textarea { /* Textarea remains as it was, not a dropdown */
+    width: 60%; /* Original width for textarea */
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1em;
+    font-family: 'Inter', sans-serif;
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    min-height: 120px;
+    resize: vertical;
+}
+select {
+    appearance: none; /* Remove default arrow */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23333" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 16px;
+}
+
+/* Custom Upload Button */
+.upload {
+    background-color: black;
+    padding: 7px;
+    width: 300px;
+    height: 60px;
+    color: white;
+    border: none;
+    display: block;
+    margin: auto;
+    transition: 0.2s all ease-in;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    border-radius: 0;
+    font-size: 1em;
+    font-weight: normal;
+}
+.upload:hover {
+    border-radius: 30px;
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.3);
+    background-color: black;
+    transform: none;
+}
+
+#plantPicturePreview {
+    display: none;
+    max-width: 100%;
+    max-height: 300px;
+    margin: 20px auto;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    object-fit: contain;
+}
+
+/* AI Response Section */
+#autopsyResult {
+    background-color: #e6ffe6;
+    border: 1px solid #4CBB17;
+    border-radius: 10px;
+    padding: 30px;
+    margin-top: 40px;
+    text-align: left;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+#autopsyResult h3 {
+    font-family: 'Lora', sans-serif;
+    color: #2d3748;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 1.8em;
+}
+#autopsyResult p {
+    font-family: 'Inter', sans-serif;
+    color: #333;
+    line-height: 1.6;
+    text-align: left;
+    font-size: 1.05em;
+}
+.loading-spinner {
+    display: none;
+    text-align: center;
+    margin-top: 30px;
+    font-size: 1.2em;
+    color: #4CBB17;
+}
+.loading-spinner::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #4CBB17;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Navbar styling */
+.navbar-nav .nav-link svg {
+    vertical-align: middle;
+    margin-left: 5px;
+}
+
+/* Dropdown focus style */
+select:focus {
+    border-color: #000; /* Black border on focus */
+    box-shadow: 0 0 0 0.25rem rgba(0, 0, 0, 0.25); /* Darker shadow on focus */
+    outline: none;
+}
+
+select option {
+    font-family: 'Inter', sans-serif;
+    color: #333;
+}
+
+/* Style for the manual plant name input */
+#plantNameManualInput input[type="text"] {
+    margin-top: 5px;
+    margin-bottom: 0;
+    width: 45%; /* Adjusted width to match select */
+    display: block;
+    margin:auto;
+}
+
+/* Semantic Map Styling (for D3.js) */
+#semanticMapContainer {
+    margin-top: 30px;
+    border-top: 1px solid #ccc;
+    padding-top: 20px;
+    text-align: center;
+}
+#semanticMapContainer h4 {
+    font-family: 'Lora', sans-serif;
+    color: #2d3748;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+}
+#semanticMapSVG {
+    width: 100%;
+    height: 400px; /* Fixed height for the map */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    /* Figma-like background */
+    background-image: linear-gradient(45deg, #eee 25%, transparent 25%),
+                      linear-gradient(-45deg, #eee 25%, transparent 25%),
+                      linear-gradient(45deg, transparent 75%, #eee 75%),
+                      linear-gradient(-45deg, transparent 75%, #eee 75%);
+    background-size: 20px 20px; /* Size of the squares */
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px; /* Offset for seamless pattern */
+}
+.node-circle {
+    stroke: #333;
+    stroke-width: 1.5px;
+    cursor: grab; /* Indicate draggable */
+}
+.node-circle:active {
+    cursor: grabbing; /* Indicate dragging */
+}
+.node-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    fill: #FFFFFF; /* White text color */
+    pointer-events: none; /* Allows clicks to pass through to the circle */
+    text-anchor: middle;
+    dominant-baseline: central;
+}
+.link {
+    stroke: #999;
+    stroke-opacity: 0.6;
+    stroke-width: 2px;
+}

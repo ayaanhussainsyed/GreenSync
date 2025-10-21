@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lora:ital,wght@0,400..700;1,400..700&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto+Slab:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;700&family=Inter:wght@400;700&family=Lora:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+  <title>Onboarding 🚀 | GreenSync</title>
+</head>
+<body>
+  <div class="container">
+    <h1>Which climate zone are you in? 🌍</h1>
+
+    <form action="/login-survey-3" method="POST" class="radio-group">
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="zone" value="Torrid" id="c1" required>
+        <label class="form-check-label" for="c1">☀️ Torrid Zone</label>
+        <div class="desc">Hot and humid — regions near the equator like India, Brazil, Indonesia, and parts of Africa.</div>
+      </div>
+
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="zone" value="Temperate" id="c2">
+        <label class="form-check-label" for="c2">🍃 Temperate Zone</label>
+        <div class="desc">Mild climate — includes most of Europe, USA, China, and parts of Australia.</div>
+      </div>
+
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="zone" value="Frigid" id="c3">
+        <label class="form-check-label" for="c3">❄️ Frigid Zone</label>
+        <div class="desc">Cold and icy — found in Arctic/Antarctic regions, Northern Canada, Russia, and Greenland.</div>
+      </div>
+
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="zone" value="Not Specified" id="c4">
+        <label class="form-check-label" for="c4">🙈 Would not like to specify</label>
+        <div class="desc">If you're unsure or don't want to share your climate zone.</div>
+      </div>
+
+      <button class="next" type="submit">
+        Next
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none">
+          <path d="M20 12H4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M15 17C15 17 20 13.318 20 12C20 10.682 15 7 15 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </form>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+</body>
+</html>

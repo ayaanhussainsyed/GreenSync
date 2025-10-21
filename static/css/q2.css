@@ -1,0 +1,50 @@
+.next {
+    color: black;
+    background-color: white;
+    width: fit-content;
+    height: fit-content;
+    padding: 10px 20px;
+    display: block;
+    margin: 40px auto 0;
+    border: none;
+    font-weight: bold;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #D43790;
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: black;
+    opacity: 0;
+    animation: fadeIn 1.5s ease-in-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .container {
+    text-align: center;
+  }
+
+  .checkbox-group {
+    text-align: left;
+    margin-top: 30px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .form-check {
+    margin-bottom: 15px;
+  }
+
+  label {
+    font-size: 1.1rem;
+  }

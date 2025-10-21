@@ -1,0 +1,228 @@
+.form-step {
+    display: none; /* Hidden by default */
+    opacity: 0;    /* Fully transparent by default */
+    transition: opacity 0.5s ease; /* Transition only opacity */
+}
+.form-step.active {
+    display: block; /* Makes it visible for transition */
+    opacity: 1;    /* Makes it fully opaque */
+}
+
+/* Canvas and Cursor */
+canvas#slamMapCanvas {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: none; /* Hide the native cursor over the canvas */
+    border: 1px solid #ddd; /* Add a subtle border for better visibility */
+}
+/* Styles for the custom emoji cursor */
+#customCursor {
+    position: fixed; /* Keep it relative to the viewport */
+    pointer-events: none; /* Crucial: allows clicks to pass through */
+    z-index: 9999; /* Ensure it's on top */
+    font-size: 2em; /* Adjust emoji size as needed */
+    line-height: 1; /* Helps control vertical spacing */
+    display: none; /* Hidden by default, shown on mouseenter */
+}
+
+/* General Typography & Layout */
+.container h1{
+    text-align: center;
+    font-family: 'Lora',sans-serif;
+}
+/* Styles for H2 headings within form steps */
+.form-step h2{
+    font-family: 'Lora',sans-serif;
+    font-weight: thin; /* Applies to #one h2 but also good general default */
+    margin-left:100px;
+    font-size:30px; /* Applies to #one h2 but also good general default */
+}
+/* Specific overrides if needed (e.g., #one p, #clickedCoords) */
+#one p{
+    color:#6b6767;
+    margin-left:100px;
+    font-size: 12px;
+}
+#clickedCoords{
+    text-align: center;
+    color:#6b6767;
+}
+
+/* Navigation Buttons (Next/Submit) */
+.next-step-button{ /* Common class for navigation buttons */
+    border:none;
+    background-color: #4CBB17;
+    color:black;
+    display: block;
+    margin: auto;
+    transition: transform 0.3s ease, border-radius 0.3s ease; /* Combined transitions */
+    width: 170px;
+    height:40px;
+    display: flex; /* Use flexbox to center content */
+    align-items: center; /* Vertically center content */
+    justify-content: center; /* Horizontally center content */
+    text-decoration: none; /* Remove underline if it's a link styled as button */
+    cursor: pointer; /* Indicate it's clickable */
+}
+.next-step-button:hover svg {
+    transform: translateX(4px);
+}
+.next-step-button:hover{
+    border-radius: 20px;
+}
+/* Animate the SVG inside the button */
+.next-step-button svg {
+    transition: transform 0.3s ease;
+    margin-left: 6px;
+    vertical-align: middle;
+}
+
+/* Custom Upload Button (now applied to a <button> element) */
+.upload{
+    background-color: black;
+    padding:7px;
+    width:300px;
+    height:60px;
+    color:white;
+    border: none;
+    display: block;
+    margin: auto;
+    transition: 0.2s all ease-in;
+    cursor: pointer; /* Indicate it's clickable */
+    text-align: center; /* Center text/content (redundant with flex, but harmless) */
+    /* Use flexbox for robust vertical centering on a button */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap; /* Prevents "Choose File" from wrapping */
+}
+.upload:hover{
+    border-radius:30px;
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* NEW: Styling for Section 3 elements */
+#three h2 {
+    text-align: center; /* Center the H2 text */
+    margin-left: 0; /* Override previous left margin */
+}
+
+#three label {
+    display: block; /* Make label a block element for better layout control */
+    text-align: center; /* Center the label text */
+    margin-bottom: 10px; /* Add some space below the label */
+    font-family: 'Inter', sans-serif; /* Example font */
+    color: #555; /* Example color */
+}
+
+#three input[type="number"] {
+    display: block; /* Make it a block element to allow margin: auto */
+    margin: 15px auto 30px auto; /* Center horizontally, add vertical spacing */
+    padding: 12px 20px; /* Good padding */
+    width: 150px; /* Set a fixed width */
+    border: 1px solid #ccc; /* Subtle border */
+    border-radius: 8px; /* Rounded corners */
+    font-size: 1.1em; /* Slightly larger text */
+    text-align: center; /* Center the number itself */
+    -moz-appearance: textfield; /* Hide Firefox spinner */
+}
+
+/* Hide Chrome/Safari number input arrows */
+#three input[type="number"]::-webkit-outer-spin-button,
+#three input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Adjust the Submit button to be next to the new Next button */
+#three .text-end {
+    display: flex;
+    justify-content: center; /* Center both buttons */
+    gap: 20px; /* Space between buttons */
+    margin-top: 30px; /* Space above buttons */
+}
+
+#plantDetailsOutput{
+    display: block;
+    margin:auto;
+    width:auto; /* Allow it to take natural width */
+    text-align: left; /* Align text to the left within this div */
+    padding: 10px; /* Add some padding */
+    border-radius: 8px; /* Rounded corners */
+    margin-top: 20px; /* Space from preview image */
+    max-width: 600px; /* Limit max width for readability */
+}
+#plantDetailsOutput p{
+    text-align: left; /* Ensure paragraphs within are left-aligned */
+    margin-bottom: 5px; /* Reduce space between paragraphs */
+}
+#plantDetailsOutput #plantDescription { /* Specific styling for the description div */
+    font-style: italic;
+    color: #555;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    white-space: normal; /* Allow text to wrap naturally */
+}
+#plantDetailsOutput strong {
+    color: #2d3748;
+}
+.start{
+    background-color: black;
+    color:white;
+    border:none;
+    width:177px;
+    height:40px;
+    border-radius: 20px;
+}
+
+/* Styles for the message displayed on the canvas */
+.canvas-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #666;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.1em;
+    text-align: center;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 10; /* Ensure it's above the canvas */
+}
+
+#mapContainer {
+    position: relative; /* Needed for absolute positioning of canvas-message */
+    width: 100%;
+    max-width: 600px; /* Adjust as needed */
+    margin: 0 auto;
+    height: 400px; /* Fixed height for the container to show message */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ddd; /* Visual cue for the map area */
+    background-color: #f8f8f8; /* Light background when no map */
+}
+
+#slamMapCanvas {
+    position: absolute; /* Position canvas within the container */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Ensure map fits without distortion */
+    display: block; /* Will be set to 'none' if no map */
+}
+
+#mapMarker {
+    position: absolute;
+    width: 20px; /* Size of your marker */
+    height: 20px;
+    background-color: red; /* Color of your marker */
+    border-radius: 50%; /* Make it a circle */
+    transform: translate(-50%, -50%); /* Center the marker on the click point */
+    display: none; /* Hidden by default */
+    z-index: 20; /* Ensure it's above the map */
+}

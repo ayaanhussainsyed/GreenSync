@@ -1,0 +1,56 @@
+.next {
+    color: black;
+    background-color: white;
+    padding: 10px 20px;
+    display: block;
+    margin: 40px auto 0;
+    border: none;
+    font-weight: bold;
+    border-radius: 8px;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #6CB4EE;
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: black;
+    opacity: 0;
+    animation: fadeIn 1.5s ease-in-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .container {
+    text-align: center;
+    max-width: 700px;
+  }
+
+  .radio-group {
+    text-align: left;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .form-check {
+    margin-bottom: 20px;
+  }
+
+  label {
+    font-size: 1.1rem;
+    font-weight: bold;
+  }
+
+  .desc {
+    font-size: 0.95rem;
+    color: #222;
+    margin-left: 30px;
+  }

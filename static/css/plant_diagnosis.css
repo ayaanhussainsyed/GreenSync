@@ -1,0 +1,121 @@
+body {
+    font-family: 'Space Grotesk', sans-serif;
+    color: black;
+    background-color: #ffffff;
+    background-repeat: repeat;
+    background-size: auto;
+    opacity: 0; /* Start with opacity 0 for fade-in */
+    transition: opacity 1s ease-in-out; /* Fade-in transition for the whole page */
+}
+body.fade-in {
+    opacity: 1; /* Fade in to full opacity */
+}
+@keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+h1 {
+    font-weight: 700;
+    text-align: center;
+    font-size: 75px;
+}
+p {
+    text-align: center;
+    color: rgb(180,181,189);
+}
+.start {
+    background-color: black;
+    padding: 7px;
+    width: 300px;
+    height: 60px;
+    color: white;
+    border: none;
+    display: block;
+    margin: auto;
+    transition: 0.2s all ease-in;
+}
+.start:hover {
+    border-radius: 30px;
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Prediction text container */
+.prediction-container {
+    font-family: 'Lora', serif; /* Set font to Lora */
+    font-size: 1.2rem; 
+    font-weight: 400; /* Not bold */
+    color: black; 
+    min-height: 30px;
+    text-align: center;
+    opacity: 0; 
+    transition: opacity 1s ease-in-out; 
+    margin-top: 20px; 
+}
+
+/* Lottie loader container */
+.loader-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px; 
+    margin-top: 20px;
+    opacity: 0; 
+    transition: opacity 1s ease-in-out; 
+}
+.hidden {
+    display: none;
+}
+
+/* Disease info container - simplified styling */
+.disease-info-container {
+    margin-top: 30px;
+    text-align: left; 
+    color: black; 
+    max-width: 700px; 
+    padding:20px;
+    border-radius: 17px;
+    margin-left: auto; 
+    margin-right: auto; 
+    font-family: 'Lora',sans-serif;
+    background-color:#F0E58B;
+    opacity: 0; 
+    transition: opacity 1s ease-in-out; 
+    font-size: 1rem; 
+    line-height: 1.6;
+}
+/* Styling for strong tags within disease-info-container */
+.disease-info-container strong {
+    color: #2d3748; 
+}
+.next-step-button{ 
+    border:none;
+    background-color: #4CBB17;
+    color:black; /* Changed text color to black */
+    padding:5px;
+    width: 180px;
+    height:40px;
+    margin-top: 20px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    text-decoration: none; 
+    cursor: pointer; 
+    border-radius: 0px; /* Boxy corners by default */
+    margin-left: auto; 
+    margin-right: auto; 
+    transition: transform 0.3s ease, border-radius 0.3s ease; 
+}
+.next-step-button:hover {
+    border-radius: 20px; /* Rounded on hover */
+}
+.next-step-button:hover svg {
+    transform: translateX(4px);
+}
+/* Animate the SVG inside the button */
+.next-step-button svg {
+    transition: transform 0.3s ease;
+    margin-left: 6px;
+    vertical-align: middle;
+}

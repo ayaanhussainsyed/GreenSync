@@ -1,0 +1,38 @@
+.hero h1{
+    text-align: center;
+    margin-top:130px;
+    font-size:57px;
+    font-family: 'Raleway',sans-serif;
+    animation: fadeIn 1s ease-out forwards;
+}
+.hero p{
+    color:#9c9fa2;
+    text-align: center;
+    animation: fadeIn 1s ease-out forwards;
+}
+.options{
+    display: block;
+    margin: auto;
+    animation: fadeIn 1s ease-out forwards;
+}
+.opts{
+    background-color: black;
+    border:none;
+    font-family: "Raleway",sans-serif;
+    color:white;
+    height:65px;
+    width:300px;
+    display: block;
+    margin: auto;
+    font-size:20px;
+    transition: 0.2s all ease-in;
+}
+.opts:hover{
+    border-radius: 31px;
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.3);
+}
+    /* CSS Animations */
+    @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); } /* Start slightly below and transparent */
+    to { opacity: 1; transform: translateY(0); } /* End fully visible and in place */
+}
